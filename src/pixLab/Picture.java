@@ -410,26 +410,10 @@ public class Picture extends SimplePicture {
                 leftPixel = pixels[row][col];
                 rightPixel = pixels[row][col + 1];
                 rightColor = rightPixel.getColor();
-                if (leftPixel.colorDistance(rightColor)
-                        > edgeDist) {
-                    leftPixel.setColor(Color.RED);
-                } else {
-                    leftPixel.setColor(Color.GREEN);
-                }
-            }
-        }
-        for (int col = 0; col < pixels.length; col++) {
-            for (int row = 0;
-                    row < pixels.length - 1; row++) {
-                leftPixel = pixels[row][col];
-                rightPixel = pixels[row+1][col];
                 rightColor = rightPixel.getColor();
-                if (leftPixel.colorDistance(rightColor)
-                        > edgeDist) {
-                    leftPixel.setColor(Color.RED);
-                } else {
-                    leftPixel.setColor(Color.GREEN);
-                }
+                float[] colors = Color.RGBtoHSB((int)(10 * leftPixel.colorDistance(rightColor)), 255 - (int) Math.pow((10 * leftPixel.colorDistance(rightColor)), .5), 0, null);
+                leftPixel.setColor(Color.getHSBColor(colors[0], colors[1], colors[2]));
+
             }
         }
     }
